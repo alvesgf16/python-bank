@@ -1,4 +1,5 @@
 from bank import Bank
+from helpers.clear import clear_screen
 
 
 class ATM:
@@ -8,10 +9,12 @@ class ATM:
 
         while True:
             authed_account = cls.__auth(bank)
+            clear_screen()
 
             while True:
                 cls.__display_menu(authed_account)
                 op = int(input("Enter your option: "))
+                clear_screen()
 
                 if op < 1 or op > 6:
                     print("Invalid option, choose a valid option.")
