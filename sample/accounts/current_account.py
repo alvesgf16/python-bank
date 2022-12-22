@@ -13,7 +13,7 @@ class Current_Account(Account):
         return self.__type
 
     def transfer_funds(self, amount, destination_account):
-        self.__add_transaction(-amount, "Transfer sent")
+        self.add_transaction(-amount, "Transfer sent")
         destination_account.add_transaction(amount, "Transfer received")
 
     def simulate_investment(self, initial_value, final_value):

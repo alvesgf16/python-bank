@@ -9,7 +9,7 @@ class Account(metaclass=ABCMeta):
         self.__holder = holder
         self.__transactions = []
 
-        self.__add_transaction(initial_deposit, "Initial deposit")
+        self.add_transaction(initial_deposit, "Initial deposit")
         print(f"Account number {self.__id} created!")
 
     @property
@@ -28,10 +28,13 @@ class Account(metaclass=ABCMeta):
         return f"{self.__id} : BRL {self.return_balance():.2f}"
 
     def deposit(self, amount):
-        self.__add_transaction(amount, "Deposit received")
+        self.add_transaction(amount, "Deposit received")
 
     def withdraw(self, amount):
-        self.__add_transaction(-amount, "Withdrawal made")
+        self.add_transaction(-amount, "Withdrawal made")
+
+    def add_transaction(self, amount, description):
+        self.__transactions.append(Transaction(amount, description))
 
     def return_balance(self):
         return sum(transaction.amount for transaction in self.__transactions)
@@ -49,6 +52,3 @@ class Account(metaclass=ABCMeta):
     @abstractmethod
     def simulate_investment(self, initial_value, final_value):
         pass
-
-    def __add_transaction(self, amount, description):
-        self.__transactions.append(Transaction(amount, description))
